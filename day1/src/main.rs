@@ -3,18 +3,18 @@ pub fn main() {
     let a = include_str!("../input.txt")
         .lines()
         .map(|calibration| extract_digits(calibration, false))
-        .sum::<i32>();
+        .sum::<u32>();
 
     let b = include_str!("../input.txt")
     .lines()
     .map(|calibration| extract_digits(calibration, true))
-    .sum::<i32>();
+    .sum::<u32>();
  
     println!("{:?}", a);
     println!("{:?}", b);
 }
 
-fn extract_digits(line: &str, parse: bool) -> i32 {
+fn extract_digits(line: &str, parse: bool) -> u32 {
     
     let line_to_parse = if parse { parse_words(line) } else { line.to_string() };
     let digits = line_to_parse
@@ -24,9 +24,7 @@ fn extract_digits(line: &str, parse: bool) -> i32 {
         .collect::<Vec<u32>>();
 
     if let (Some(first_digit), Some(last_digit)) = (digits.first(), digits.last()) {
-        return (first_digit.to_string() + last_digit.to_string().as_str())
-            .parse::<i32>()
-            .unwrap();
+        return first_digit* 10 + last_digit   
     } else {
         return 0;
     }
