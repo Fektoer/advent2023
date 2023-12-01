@@ -9,7 +9,7 @@ pub fn main() {
     .lines()
     .map(|calibration| extract_digits(calibration, true))
     .sum::<i32>();
-    // Day1a
+ 
     println!("{:?}", a);
     println!("{:?}", b);
 }
