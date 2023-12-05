@@ -51,15 +51,19 @@ fn main() {
                     ));
                 }
 
+                // Only interested in non-digits and non-periods
                 let filtered_chars = surrounding_chars
                     .iter()
                     .filter(|(_, c)| !c.is_digit(10) && c.to_string() != ".")
                     .collect::<Vec<_>>();
 
+                // If other characters remain after the filter, add the captured value
                 if filtered_chars.len() > 0 {
                     intermediate_sum += cap_value.parse::<u32>().unwrap();
                 }
 
+                // Then check if one of the remaining symbols was a gear (*), if so create a hashmap with gear coordinate
+                // and an array of captured values
                 let _ = filtered_chars
                     .iter()
                     .map(|(key, c)| {
@@ -79,6 +83,7 @@ fn main() {
 
     println!("3A {:?}", sum_parts);
 
+    // Filter our gear hashmap to find only those that have 2 values and aggregate the result
     let sum_gears =
         gears
             .iter()
